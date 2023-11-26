@@ -54,6 +54,10 @@ argo-cd:
       helm.valuesFileSchemes: >-
         secrets,
         https
+    rbacConfig:
+      policy.default: role:readonly
+      policy.csv: |
+        g, kvanzuijlen, role:admin
   repoServer:
     env:
       - name: SOPS_AGE_KEY_FILE
@@ -126,69 +130,3 @@ argocd-apps:
           kind: "*"
       orphanedResources:
         warn: false
-
-#  applicationsets:
-#    - name: homelab
-#      namespace: argocd
-
-
-# - name: guestbook
-#   namespace: argocd
-#   additionalLabels: {}
-#   additionalAnnotations: {}
-#   # See PR #10026 (ArgoCD v2.5 or later)
-#   # goTemplate: false
-#   generators:
-#   - git:
-#       repoURL: https://github.com/argoproj/argocd-example-apps.git
-#       revision: HEAD
-#       directories:
-#       - path: guestbook
-#       - path: kustomize-*
-#   # Progressive Syncs is an experimental feature and it must be explicitly enabled
-#   # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs/#enabling-progressive-syncs
-#   strategy:
-#     type: RollingSync
-#     rollingSync:
-#       steps:
-#       - matchExpressions:
-#         - key: project
-#           operator: In
-#           values:
-#           - guestbook
-#       - matchExpressions:
-#         - key: project
-#           operator: In
-#           values:
-#           - kustomize-foo
-#           - kustomize-bar
-#   template:
-#     metadata:
-#       name: '{{path.basename}}'
-#       labels:
-#         project: '{{path.basename}}'
-#       annotations: {}
-#     spec:
-#       project: default
-#       source:
-#         repoURL: https://github.com/argoproj/argocd-example-apps.git
-#         targetRevision: HEAD
-#         path: '{{path}}'
-#       destination:
-#         server: https://kubernetes.default.svc
-#         namespace: default
-#       syncPolicy:
-#         automated:
-#           prune: false
-#           selfHeal: false
-#       ignoreDifferences:
-#       - group: apps
-#         kind: Deployment
-#         jsonPointers:
-#         - /spec/replicas
-#       info:
-#       - name: url
-#         value: https://argoproj.github.io/
-#   syncPolicy:
-#     # Set Application finalizer
-#     preserveResourcesOnDeletion: false
