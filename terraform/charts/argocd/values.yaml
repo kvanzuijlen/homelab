@@ -1,3 +1,6 @@
+age:
+  secretName: &ageSecretName helm-secrets-private-keys
+
 argo-cd:
   global:
     image:
@@ -52,6 +55,16 @@ argo-cd:
         secrets,
         https
   repoServer:
+    env:
+      - name: SOPS_AGE_KEY_FILE
+        value: /helm-secrets-private-keys/key.txt
+    volumes:
+      - name: *ageSecretName
+        secret:
+          secretName: *ageSecretName
+    volumeMounts:
+      - mountPath: /helm-secrets-private-keys/
+        name: *ageSecretName
     rbac:
       - apiGroups:
           - argoproj.io
