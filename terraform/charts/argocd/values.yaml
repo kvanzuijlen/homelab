@@ -46,6 +46,7 @@ argo-cd:
       enabled: true
       annotations:
         kubernetes.io/tls-acme: "true"
+        "nginx.ingress.kubernetes.io/ssl-redirect": "false"
     config:
       helm.valuesFileSchemes: >-
         secrets,
