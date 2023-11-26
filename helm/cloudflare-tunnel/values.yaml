@@ -1,0 +1,3 @@
+cloudflare-tunnel:
+  cloudflare:
+    tunnelName: homelab

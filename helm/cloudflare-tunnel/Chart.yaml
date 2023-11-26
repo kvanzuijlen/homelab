@@ -1,0 +1,9 @@
+apiVersion: v2
+name: cloudflare-tunnel
+description: A Helm chart for Kubernetes
+type: application
+dependencies:
+  - name: cloudflare-tunnel
+    version: &version 0.3.0
+    repository: https://cloudflare.github.io/helm-charts
+version: *version

@@ -1,0 +1,33 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+  labels:
+    app: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/name: {{ template "cert-manager.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "labels" . | nindent 4 }}
+  {{ with .Values.clusterIssuer.annotations }}
+  annotations:
+    {{ toYaml . | nindent 4 }}
+  {{ end }}
+spec:
+  acme:
+    # The ACME server URL
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: {{ .Values.clusterIssuer.cloudflare.acmeEmail }}
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+      # An empty selector will 'match' all Certificate resources that
+      # reference this Issuer.
+      - selector: {}
+        dns01:
+          # providers in the documentation: https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/index.html
+          cloudflare:
+            email: {{ .Values.clusterIssuer.cloudflare.apiEmail }}
+            apiTokenSecretRef:
+              name: cloudflare-api-token-secret
+              key: api-token

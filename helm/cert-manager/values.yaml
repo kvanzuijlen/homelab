@@ -1,0 +1,16 @@
+global:
+  commonLabels: &commonLabels {}
+
+cert-manager:
+  global:
+    commonLabels: *commonLabels
+  leaderElection:
+    # Override the namespace used to store the ConfigMap for leader election
+    namespace: cert-manager
+  installCRDs: true
+  clusterResourceNamespace: cert-manager
+  ingressShim:
+    defaultIssuerName: letsencrypt
+    defaultIssuerKind: ClusterIssuer
+    defaultACMEChallengeType: dns01
+    defaultACMEDNS01ChallengeProvider: cloudflare

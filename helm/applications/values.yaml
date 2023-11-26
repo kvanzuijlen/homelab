@@ -1,0 +1,14 @@
+repo: git@github.com:kvanzuijlen/homelab.git
+project: homelab
+branch: main
+
+apps:
+  cert-manager:
+    valueFiles:
+      - values.yaml
+      - secrets://secrets.yaml
+
+  cloudflare-tunnel:
+    valueFiles:
+      - values.yaml
+      - secrets://secrets.yaml
