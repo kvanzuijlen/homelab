@@ -58,7 +58,6 @@ jobs:
         run: |
           for file in images/**/Dockerfile ; do
             dir=$(dirname ${file})
-            (( $(git diff HEAD~1 --name-only -- $dir | wc -l) == 0 )) && continue
             ( cd $dir ; make push )
           done
         env:
