@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - images/**/*
   push:
     branches:
-      - master
+      - main
     paths:
       - images/**/*
 
