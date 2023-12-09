@@ -44,7 +44,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: "1"
       - name: Build and push all changed files
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: |
           for file in images/**/Dockerfile ; do
             dir=$(dirname ${file})
