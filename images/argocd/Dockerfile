@@ -1,4 +1,4 @@
-FROM alpine:3.19.0 AS binaries
+FROM alpine:3.20.3 AS binaries
 ARG TARGETOS
 ARG TARGETARCH
 
