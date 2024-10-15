@@ -13,7 +13,7 @@ terraform {
       version = "1.0.0"
     }
     helm = {
-      version = "2.11.0"
+      version = "2.16.1"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
