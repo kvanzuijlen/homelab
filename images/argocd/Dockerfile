@@ -7,7 +7,7 @@ ENV SOPS_VERSION=v3.8.1
 RUN wget https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.${TARGETOS}.${TARGETARCH} -O /tmp/sops && chmod +x /tmp/sops
 
 ########################################################################################################################
-FROM quay.io/argoproj/argocd:v2.9.3@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff
+FROM quay.io/argoproj/argocd:v2.12.6@sha256:86081736f6494292671f079f497f28dd332e2aabdab7d790317b1e5956ad64da
 # renovate: datasource=github-tags depName=jkroepke/helm-secrets versioning=loose
 ENV HELM_SECRETS_VERSION=v4.5.1
 
